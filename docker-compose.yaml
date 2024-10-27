@@ -1,0 +1,46 @@
+volumes:
+  postgres_data:
+
+services:
+  streamlit:
+    build: ./
+    ports:
+      - "8501:8501"
+    command: streamlit run ./client/streamlit_app.py --server.port 8501 --server.fileWatcherType poll
+    volumes:
+      - ./:/app
+    depends_on:
+      - django
+  
+
+  django:
+    image: stock-analyzer:0.0.1
+    build: .
+    ports:
+     - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    
+
+  postgres:
+    image: postgres:15.8
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: stock_analyzer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      retries: 1
+      start_period: 3s
+      timeout: 3s
