@@ -1,3 +1,11 @@
+### Visit the deployed website ###
+
+URL: [https://stock-danalysis.streamlit.app/](https://stock-danalysis.streamlit.app/)
+
+- Front-end client deployed using Streamlit
+- Back-end Django server deployed using AWS EC2
+- PostgreSQL database hosted using AWS RDS
+
 ### Run on your local machine ###
 
 To run this project on your local machine, you will need to have [Docker](https://www.docker.com/get-started/) installed.
