@@ -60,12 +60,12 @@ if st.session_state.stock_data is not None:
         initial_investment = st.slider(label='Initial Investment', min_value=1, max_value=100_000)
 
         buy_day_range = st.slider(
-            label='Buy IBM shares when price dips below the x-day moving average.', 
+            label=f'Buy {stock_symbol} shares when price dips below the x-day moving average.', 
             min_value=1, max_value=200
         )
 
         sell_day_range = st.slider(
-            label='Sell IBM shares when the price goes above the x-day moving average.', 
+            label=f'Sell {stock_symbol} shares when the price goes above the x-day moving average.', 
             min_value=1, max_value=200
         )
 
