@@ -11,6 +11,9 @@ services:
       - ./:/app
     depends_on:
       - django
+    environment:
+      - DJANGO_HOST=django
+      - DJANGO_PORT=8000
   
 
   django:
@@ -23,6 +26,13 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
+    environment:
+      - POSTGRES_DB=stock_analyzer
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - ALPHA_VANTAGE_API_KEY= ***YOUR API KEY HERE***
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"

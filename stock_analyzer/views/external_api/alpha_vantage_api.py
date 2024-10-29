@@ -1,5 +1,9 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def get_time_series_daily(symbol, output_size='compact'):
