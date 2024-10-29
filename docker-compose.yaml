@@ -2,20 +2,6 @@ volumes:
   postgres_data:
 
 services:
-  streamlit:
-    build: ./
-    ports:
-      - "8501:8501"
-    command: streamlit run ./client/streamlit_app.py --server.port 8501 --server.fileWatcherType poll
-    volumes:
-      - ./:/app
-    depends_on:
-      - django
-    environment:
-      - DJANGO_HOST=django
-      - DJANGO_PORT=8000
-  
-
   django:
     image: stock-analyzer:0.0.1
     build: .
@@ -32,11 +18,25 @@ services:
       - POSTGRES_PASSWORD=secret
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - ALPHA_VANTAGE_API_KEY= ***YOUR API KEY HERE***
+      - ALPHA_VANTAGE_API_KEY=***YOUR API KEY HERE***
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
-    
+
+             
+  streamlit:
+    build: ./
+    ports:
+      - "8501:8501"
+    command: streamlit run ./client/streamlit_app.py --server.port 8501 --server.fileWatcherType poll
+    volumes:
+      - ./:/app
+    depends_on:
+      - django
+    environment:
+      - DJANGO_HOST=django
+      - DJANGO_PORT=8000
+  
 
   postgres:
     image: postgres:15.8
