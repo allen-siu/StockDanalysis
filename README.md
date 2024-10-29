@@ -2,8 +2,8 @@
 
 URL: [https://stock-danalysis.streamlit.app/](https://stock-danalysis.streamlit.app/)
 
-- Front-end client deployed using Streamlit
-- Back-end Django server deployed using AWS EC2
+- Front-end client hosted using Streamlit
+- Back-end Django server hosted using AWS EC2
 - PostgreSQL database hosted using AWS RDS
 
 ### Run on your local machine ###
