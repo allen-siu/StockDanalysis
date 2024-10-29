@@ -6,6 +6,10 @@ from stock_analyzer.views.backtest_strategies import moving_average
 from stock_analyzer.views.data_prediction_models import linear_regression
 
 
+def hello_world(request):
+    return HttpResponse('Hello World')
+
+
 def get_stock_data(request):
     try:
         symbol = request.GET.get('symbol').upper()
