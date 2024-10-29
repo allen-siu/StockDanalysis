@@ -19,6 +19,8 @@ if 'prediction_pdf_content' not in st.session_state:
 def reset():
     st.session_state.stock_data = None
     st.session_state.simulation_dataframe = None
+    st.session_state.prediction_dataframes = None
+    st.session_state.prediction_pdf_content = None
 
 
 st.title('Stock Analyzer')
